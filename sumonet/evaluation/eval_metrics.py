@@ -1,7 +1,7 @@
 from sklearn import metrics
 
 def f1_score(y_true, y_probs):
-    print('up')
+    
     return metrics.f1_score(y_true, y_probs.argmax(-1))
 
 def mcc(y_true, y_probs):
