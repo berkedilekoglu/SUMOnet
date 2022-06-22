@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import epitopepredict as ep
 
+from utils.load_data import Data
+
 def create_dict():
     # Global function that is used for one-hot encoding
     # Function works like a map
@@ -30,7 +32,7 @@ def create_dict():
     letterDict["X"] = 20 
     return letterDict
 
-class Encoding:
+class Encoding(Data):
 
     def __init__(self,encoderType):
 
@@ -47,14 +49,6 @@ class Encoding:
         self.sequences = []
         self.X = None
         self.Y = None
-
-    def get_new_data(self,filePath):
-    
-        with open(filePath) as f:
-                
-                my_array = f.read().splitlines()
-    
-        return my_array[1::2] 
 
     def one_hot(self,data):
 
@@ -118,9 +112,9 @@ class Encoding:
 
         elif self.encoderType.lower() == 'one-hot':
             
-            return self.bl_encoder(self.sequences)
+            return self.one_hot(self.sequences)
 
-    def get_encoded_vectors(self,posDataPath,negDataPath):
+    def get_encoded_vectors_from_path(self,posDataPath,negDataPath):
 
         """
         This function is used to get encoded vectors.
@@ -136,8 +130,8 @@ class Encoding:
             self.Y: Labels
         """
 
-        self.posData = self.get_new_data(posDataPath)
-        self.negData = self.get_new_data(negDataPath)
+        self.posData = super().get_new_data(posDataPath)
+        self.negData = super().get_new_data(negDataPath)
         self.sequences = self.posData + self.negData
 
         self.X = self.encode()
@@ -145,3 +139,23 @@ class Encoding:
 
         return self.X, self.Y
 
+
+    def get_encoded_vectors_from_data(self,X):
+
+        """
+        This function is used to get encoded representation of given vectors.
+
+        Args:
+
+            X: List that contains samples.
+
+        Output:
+
+            self.X: Encoded samples
+        """
+
+        self.sequences = X
+
+        self.X = self.encode()
+
+        return self.X
