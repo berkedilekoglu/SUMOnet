@@ -1,4 +1,5 @@
 from tensorflow.keras import layers
+from tensorflow.keras.regularizers import l2
 
 class SUMOnet(layers.Layer):
 
