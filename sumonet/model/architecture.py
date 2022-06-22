@@ -1,5 +1,5 @@
 
-from tensorflow.keras import layers, Model, losses, regularizers
+from tensorflow.keras import layers, Model, regularizers
 
 class Architecture(Model):
 
