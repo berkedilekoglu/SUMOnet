@@ -1,8 +1,18 @@
+import joblib
 import numpy as np
 import pandas as pd
 import epitopepredict as ep
+from pathlib import Path
+
+modulePath = str(Path(__file__).parent.parent.resolve())
 
 from utils.load_data import Data
+
+def get_min_max_scaler():
+
+        return modulePath + "/scaler/minmax_scaler.gz"
+
+
 
 def create_dict():
     # Global function that is used for one-hot encoding
@@ -34,11 +44,11 @@ def create_dict():
 
 class Encoding(Data):
 
-    def __init__(self,encoderType):
+    def __init__(self,encoderType,scaler=True):
 
 
         self.encoderType = encoderType
-
+        self.scaler = scaler
         self.posData = []
         self.negData = []
 
@@ -94,7 +104,7 @@ class Encoding(Data):
 
         nlf_data = np.asarray(nlf_data,dtype='float32')
 
-        return nlf_data            
+        return nlf_data     
 
     def labels(self):
 
@@ -159,3 +169,14 @@ class Encoding(Data):
         self.X = self.encode()
 
         return self.X
+
+    def minmax(self, X):
+
+        minmax_scaler = joblib.load(get_min_max_scaler())
+        return minmax_scaler.transform(X)
+
+    def reshape(self,X):
+
+        return X.reshape(len(X),21,X.shape[1]//21)
+    
+    

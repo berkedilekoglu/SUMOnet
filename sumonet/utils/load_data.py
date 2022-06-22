@@ -24,6 +24,8 @@ def get_test_data():
 
         return posTestDataPath, negTestDataPath
 
+
+
 class Data:
 
         def __init__(self):
@@ -70,3 +72,5 @@ class Data:
 
 
                 return X_train, y_train, X_test, y_test
+
+       
