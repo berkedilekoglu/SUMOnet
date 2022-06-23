@@ -59,6 +59,9 @@ class Encoding(Data):
         self.X = None
         self.Y = None
 
+    def set_encoder_type(self,encoderType):
+        self.encoderType = encoderType
+
     def one_hot(self,data):
 
         oneHot_data = np.zeros((len(data),len(data[0]),len(self.encodings)))
@@ -177,7 +180,7 @@ class Encoding(Data):
         self.preprocess()
         self.preprocess_labels()
 
-        return self.X
+        return self.X, self.Y
     
     def minmax(self):
 
