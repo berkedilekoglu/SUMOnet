@@ -36,6 +36,7 @@ pip install sumonet
 ## Author
 
 > Coding: Berke Dilekoglu
+
 > Paper and Experiments: Oznur Tastan, Berke Dilekoglu
 
 ## License
