@@ -45,7 +45,7 @@ def create_dict():
 
 class Encoding(Data):
 
-    def __init__(self,encoderType,scaler=True):
+    def __init__(self,encoderType='blosum62',scaler=True):
 
 
         self.encoderType = encoderType
