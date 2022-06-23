@@ -12,7 +12,6 @@ setup(
     url='https://github.com/berkedilekoglu/SUMOnet',
     keywords='sumoylation machine-learning deep-learning',
     install_requires=[
-        python,
         numpy,
         scikit-learn,
         joblib,
