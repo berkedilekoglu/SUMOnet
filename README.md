@@ -10,6 +10,7 @@
 
 > All packages will be installed automatically by pip.
 
+```python
 Python 3.6.6
 numpy 1.19.5
 scikit-learn 0.24.2
@@ -18,6 +19,7 @@ pandas 1.0.5
 epitopepredict 0.5.0
 tensorflow 2.4.0
 keras 2.3.1
+```
 
 ## Installation
 
