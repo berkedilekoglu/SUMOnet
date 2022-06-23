@@ -40,4 +40,4 @@ pip install sumonet
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[Academic Free License ("AFL") v. 3.0](https://choosealicense.com/licenses/afl-3.0/#)
