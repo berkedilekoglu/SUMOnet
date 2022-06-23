@@ -1,7 +1,7 @@
-#from pathlib import Path
+
 import random
 
-#modulePath = str(Path(__file__).parent.parent.resolve())
+
 dataPath = "sumonet/data/"
 
 def get_train_data():

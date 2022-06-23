@@ -1,9 +1,6 @@
 
 from tensorflow.keras import layers, Model, regularizers
-#from pathlib import Path
 
-
-#modulePath = str(Path(__file__).parent.parent.resolve())
 
 def get_model_path():
 

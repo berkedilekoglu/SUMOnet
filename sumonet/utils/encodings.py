@@ -3,13 +3,10 @@ import joblib
 import numpy as np
 import pandas as pd
 import epitopepredict as ep
-#from pathlib import Path
-
-#modulePath = str(Path(__file__).parent.resolve())
 
 from sumonet.utils.load_data import Data
 
-def get_min_max_scaler():
+def get_min_max_scaler_path():
 
         return "sumonet/utils/scaler/minmax_scaler.gz"
 
@@ -180,7 +177,7 @@ class Encoding(Data):
     
     def minmax(self):
 
-        minmax_scaler = joblib.load(get_min_max_scaler())
+        minmax_scaler = joblib.load(get_min_max_scaler_path())
         self.X = minmax_scaler.transform(self.X)
 
     def reshape(self):
