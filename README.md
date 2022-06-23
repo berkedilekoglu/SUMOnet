@@ -11,7 +11,7 @@
 > All packages will be installed automatically by pip.
 
 ```python
-Python 3.6.6
+python 3.6.6
 numpy 1.19.5
 scikit-learn 0.24.2
 joblib 1.0.0
