@@ -6,7 +6,7 @@ def get_model_path():
 
     modelPath = 'sumonet/model/pretrained/'
 
-    return modelPath + 'sumonet3.h5'
+    return modelPath + 'my_model_weights.h5'
 
 class SUMOnet(Model):
 
