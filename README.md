@@ -26,7 +26,7 @@ keras 2.3.1
 You can simply install SUMOnet by using pip
 
 ```python
-pip install sumonet
+pip install sumonet==0.1
 ```
 
 ## Usage
