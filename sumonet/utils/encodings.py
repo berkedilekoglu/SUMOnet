@@ -1,3 +1,4 @@
+from logging import raiseExceptions
 import joblib
 import numpy as np
 import pandas as pd
@@ -123,6 +124,9 @@ class Encoding(Data):
         elif self.encoderType.lower() == 'one-hot':
             
             self.one_hot(self.sequences)
+            
+        else:
+            raise ValueError('EncoderType is {encoderType}. It should be blosum62, nlf or one-hot.')
 
     def get_encoded_vectors_from_path(self,posDataPath,negDataPath):
 
