@@ -149,6 +149,7 @@ class Encoding(Data):
         self.labels()
 
         self.preprocess()
+        self.preprocess_labels()
 
         return self.X, self.Y
 
@@ -195,7 +196,7 @@ class Encoding(Data):
 
     def preprocess_labels(self,Y):
 
-            return np.eye(2)[Y]
+            self.Y = np.eye(2)[Y]
 
 
     
