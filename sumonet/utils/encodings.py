@@ -11,7 +11,7 @@ from sumonet.utils.load_data import Data
 
 def get_min_max_scaler():
 
-        return "sumonet/scaler/minmax_scaler.gz"
+        return "sumonet/utils/scaler/minmax_scaler.gz"
 
 
 
