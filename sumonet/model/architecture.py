@@ -18,7 +18,6 @@ class SUMOnet(Model):
         
         super().__init__()
         
-        #self.inp = layers.Input(shape=(input_shape))
         self.cnn = layers.Conv1D(128,2,padding='valid',activation='relu',kernel_initializer='he_normal',strides=1)
         self.bigru = layers.Bidirectional(layers.GRU(16, dropout=0.4, recurrent_dropout=0,return_sequences=True))
         self.pool = layers.GlobalAveragePooling1D()
