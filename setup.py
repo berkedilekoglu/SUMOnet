@@ -10,6 +10,7 @@ setup(
     packages=find_packages('sumonet'),
     package_dir={'': 'sumonet'},
     url='https://github.com/berkedilekoglu/SUMOnet',
+    download_url = 'https://github.com/berkedilekoglu/SUMOnet/archive/refs/tags/v_01.tar.gz', 
     keywords='sumoylation machine-learning deep-learning',
     install_requires=[
         'numpy',
