@@ -3,7 +3,6 @@ from tensorflow.keras import layers, Model, regularizers
 from pathlib import Path
 
 
-
 modulePath = str(Path(__file__).parent.parent.resolve())
 
 def get_model_path():
@@ -32,10 +31,6 @@ class SUMOnet(Model):
         self.relu_2 = layers.Activation('relu')
         self.dense2 = layers.Dense(2, kernel_initializer='he_normal')
         self.softmax = layers.Activation('softmax')
-
-            
-
-
 
 
     def call(self, inputs):
