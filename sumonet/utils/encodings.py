@@ -44,6 +44,7 @@ class Encoding(Data):
 
     def __init__(self,encoderType='blosum62',scaler=True):
 
+        super().__init__()
 
         self.encoderType = encoderType
         self.scaler = scaler

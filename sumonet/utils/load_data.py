@@ -61,14 +61,13 @@ class Data:
         def sample_data(self, ratio=0.4):
 
                 
+                sampledPosTrainData, sampledNegTrainData, sampledPosTestData, sampledNegTestData = list(map(self.randomly_sample,self.all_data(),[ratio]*len(self.all_data())))
 
-                sampledPosTrainData, sampledNegTrainData, sampledPosTestData, sampledNegTestData = list(map(self.randomly_sample(),self.all_data(),[ratio]*len(self.all_data())))
+                X_train = sampledPosTrainData + sampledNegTrainData
+                X_test = sampledPosTestData + sampledNegTestData
 
-                X_train = len(sampledPosTrainData) + sampledNegTrainData
-                X_test = len(sampledPosTestData) + sampledNegTestData
-
-                y_train = [1]*len(sampledPosTrainData) + [0]*sampledNegTrainData
-                y_test =  [1]*len(sampledPosTestData) + [0]*sampledNegTestData
+                y_train = [1]*len(sampledPosTrainData) + [0]*len(sampledNegTrainData)
+                y_test =  [1]*len(sampledPosTestData) + [0]*len(sampledNegTestData)
 
 
                 return X_train, y_train, X_test, y_test
