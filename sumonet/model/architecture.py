@@ -1,15 +1,26 @@
 
 from tensorflow.keras import layers, Model, regularizers
+from pathlib import Path
 
 
-class Architecture(Model):
+
+modulePath = str(Path(__file__).parent.parent.resolve())
+
+def get_model_path():
+
+    modelPath = modulePath + '/model/pretrained/'
+
+    return modelPath + 'sumonet3.h5'
+
+class SUMOnet(Model):
 
     def __init__(self):
         
-        super(Architecture,self).__init__()
-
+        super().__init__()
+        
+        #self.inp = layers.Input(shape=(input_shape))
         self.cnn = layers.Conv1D(128,2,padding='valid',activation='relu',kernel_initializer='he_normal',strides=1)
-        self.bigru = layers.Bidirectional(layers.GRU(32, dropout=0.4, recurrent_dropout=0,return_sequences=True))
+        self.bigru = layers.Bidirectional(layers.GRU(16, dropout=0.4, recurrent_dropout=0,return_sequences=True))
         self.pool = layers.GlobalAveragePooling1D()
         self.dense64 = layers.Dense(64,kernel_initializer='he_normal',activity_regularizer= regularizers.l2(1e-4))
         self.dropout = layers.Dropout(0.4)
@@ -23,7 +34,7 @@ class Architecture(Model):
         self.dense2 = layers.Dense(2, kernel_initializer='he_normal')
         self.softmax = layers.Activation('softmax')
 
-        
+            
 
 
 
@@ -46,4 +57,9 @@ class Architecture(Model):
         x = self.softmax(x)
         
         return x
+
+    def load_weights(self):
+
+        preTrainedModelPath = get_model_path()
+        super().load_weights(preTrainedModelPath)
 
