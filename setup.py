@@ -12,13 +12,13 @@ setup(
     url='https://github.com/berkedilekoglu/SUMOnet',
     keywords='sumoylation machine-learning deep-learning',
     install_requires=[
-        numpy,
-        scikit-learn,
-        joblib,
-        pandas,
-        epitopepredict,
-        tensorflow,
-        keras,
+        'numpy',
+        'scikit-learn',
+        'joblib',
+        'pandas',
+        'epitopepredict',
+        'tensorflow',
+        'keras',
       ],
 
 )
