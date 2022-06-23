@@ -62,7 +62,7 @@ class Data:
 
                 
 
-                sampledPosTrainData, sampledNegTrainData, sampledPosTestData, sampledNegTestData = list(map(self.randomly_sample,self.all_data(),[ratio]*len(self.all_data())))
+                sampledPosTrainData, sampledNegTrainData, sampledPosTestData, sampledNegTestData = list(map(self.randomly_sample(),self.all_data(),[ratio]*len(self.all_data())))
 
                 X_train = len(sampledPosTrainData) + sampledNegTrainData
                 X_test = len(sampledPosTestData) + sampledNegTestData
