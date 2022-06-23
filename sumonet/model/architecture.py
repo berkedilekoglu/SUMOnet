@@ -1,13 +1,13 @@
 
 from tensorflow.keras import layers, Model, regularizers
-from pathlib import Path
+#from pathlib import Path
 
 
-modulePath = str(Path(__file__).parent.parent.resolve())
+#modulePath = str(Path(__file__).parent.parent.resolve())
 
 def get_model_path():
 
-    modelPath = modulePath + '/model/pretrained/'
+    modelPath = 'sumonet/model/pretrained/'
 
     return modelPath + 'sumonet3.h5'
 

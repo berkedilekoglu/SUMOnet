@@ -1,17 +1,17 @@
-from logging import raiseExceptions
+
 import joblib
 import numpy as np
 import pandas as pd
 import epitopepredict as ep
-from pathlib import Path
+#from pathlib import Path
 
-modulePath = str(Path(__file__).parent.resolve())
+#modulePath = str(Path(__file__).parent.resolve())
 
-from utils.load_data import Data
+from sumonet.utils.load_data import Data
 
 def get_min_max_scaler():
 
-        return modulePath + "/scaler/minmax_scaler.gz"
+        return "sumonet/scaler/minmax_scaler.gz"
 
 
 
@@ -124,7 +124,7 @@ class Encoding(Data):
         elif self.encoderType.lower() == 'one-hot':
             
             self.one_hot(self.sequences)
-            
+
         else:
             raise ValueError('EncoderType is {encoderType}. It should be blosum62, nlf or one-hot.')
 
