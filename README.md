@@ -29,6 +29,8 @@ You can simply install SUMOnet by using pip
 pip install sumonet==0.1
 ```
 
+Versions can be followed by [pypi](https://pypi.org/project/sumonet/)
+
 ## Usage
 
 > Please follow the tutorial.ipynb
