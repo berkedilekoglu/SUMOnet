@@ -1,6 +1,7 @@
 
 from tensorflow.keras import layers, Model, regularizers
 
+
 class Architecture(Model):
 
     def __init__(self):
@@ -45,3 +46,4 @@ class Architecture(Model):
         x = self.softmax(x)
         
         return x
+

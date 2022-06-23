@@ -4,7 +4,7 @@ import pandas as pd
 import epitopepredict as ep
 from pathlib import Path
 
-modulePath = str(Path(__file__).parent.parent.resolve())
+modulePath = str(Path(__file__).parent.resolve())
 
 from utils.load_data import Data
 
@@ -71,7 +71,7 @@ class Encoding(Data):
                 encode = self.encodings[aa]
                 oneHot_data[sample_index][feature_index][encode] = 1
                 
-        return oneHot_data     
+        self.X = oneHot_data     
 
     def blosum_helper(self,seq):
         #encode a peptide into blosum features
@@ -88,7 +88,7 @@ class Encoding(Data):
             
         bl_data = np.asarray(bl_data,dtype='float32')
 
-        return bl_data        
+        self.X = bl_data        
 
     def nlf_helper(self,seq):    
 
@@ -104,25 +104,25 @@ class Encoding(Data):
 
         nlf_data = np.asarray(nlf_data,dtype='float32')
 
-        return nlf_data     
+        self.X = nlf_data     
 
     def labels(self):
 
-        return np.asarray([1]*len(self.posData) + [0]*len(self.negData))
+        self.Y = np.asarray([1]*len(self.posData) + [0]*len(self.negData))
 
     def encode(self):
 
         if self.encoderType.lower() == 'blosum62':
             
-            return self.bl_encoder(self.sequences)
+            self.bl_encoder(self.sequences)
 
         elif self.encoderType.lower() == 'nlf':
             
-            return self.nlf_encoder(self.sequences)
+            self.nlf_encoder(self.sequences)
 
         elif self.encoderType.lower() == 'one-hot':
             
-            return self.one_hot(self.sequences)
+            self.one_hot(self.sequences)
 
     def get_encoded_vectors_from_path(self,posDataPath,negDataPath):
 
@@ -144,8 +144,10 @@ class Encoding(Data):
         self.negData = super().get_new_data(negDataPath)
         self.sequences = self.posData + self.negData
 
-        self.X = self.encode()
-        self.Y = self.labels()
+        self.encode()
+        self.labels()
+
+        self.preprocess()
 
         return self.X, self.Y
 
@@ -166,17 +168,33 @@ class Encoding(Data):
 
         self.sequences = X
 
-        self.X = self.encode()
+        self.encode()
+
+        self.preprocess()
 
         return self.X
-
-    def minmax(self, X):
+    
+    def minmax(self):
 
         minmax_scaler = joblib.load(get_min_max_scaler())
-        return minmax_scaler.transform(X)
+        self.X = minmax_scaler.transform(self.X)
 
-    def reshape(self,X):
+    def reshape(self):
 
-        return X.reshape(len(X),21,X.shape[1]//21)
-    
+        self.X = self.X.reshape(len(self.X),21,self.X.shape[1]//21)
+
+    def preprocess(self):
+        
+        if self.encoderType.lower() == 'blosum62' or self.encoderType.lower() == 'nlf':
+            
+            if self.scaler:
+                self.minmax()
+
+            self.reshape()
+
+    def preprocess_labels(self,Y):
+
+            return np.eye(2)[Y]
+
+
     

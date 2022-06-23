@@ -6,11 +6,11 @@ def f1_score(y_true, y_probs):
 
 def mcc(y_true, y_probs):
 
-    return metrics.matthews_corrcoef(y_true,y_probs.argmax(-1))
+    return metrics.matthews_corrcoef(y_true, y_probs.argmax(-1))
 
 def rocAuc_score(y_true, y_probs):
 
-    lr_fpr, lr_tpr, _ = metrics.roc_curve(y_true ,y_probs[:,1])
+    lr_fpr, lr_tpr, _ = metrics.roc_curve(y_true, y_probs[:,1])
 
     return metrics.auc(lr_fpr, lr_tpr)
 
