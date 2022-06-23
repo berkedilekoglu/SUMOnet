@@ -154,7 +154,7 @@ class Encoding(Data):
         return self.X, self.Y
 
 
-    def get_encoded_vectors_from_data(self,X):
+    def get_encoded_vectors_from_data(self,X, Y):
 
         """
         This function is used to get encoded representation of given vectors.
@@ -169,10 +169,12 @@ class Encoding(Data):
         """
 
         self.sequences = X
+        self.Y = np.asarray(Y)
 
         self.encode()
 
         self.preprocess()
+        self.preprocess_labels()
 
         return self.X
     
@@ -194,9 +196,9 @@ class Encoding(Data):
 
             self.reshape()
 
-    def preprocess_labels(self,Y):
+    def preprocess_labels(self):
 
-            self.Y = np.eye(2)[Y]
+            self.Y = np.eye(2)[self.Y]
 
 
     
