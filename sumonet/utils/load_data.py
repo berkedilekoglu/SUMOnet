@@ -51,7 +51,15 @@ class Data:
                 posTestData = self.get_new_data(self.posTestDataPath)
                 negTestData = self.get_new_data(self.negTestDataPath)
 
-                return [posTrainData, negTrainData, posTestData, negTestData]
+                X_train = posTrainData + negTrainData
+                X_test = posTestData + negTestData
+
+                y_train = [1]*len(posTrainData) + [0]*len(negTrainData)
+                y_test =  [1]*len(posTestData) + [0]*len(negTestData)
+
+
+                return X_train, y_train, X_test, y_test
+
 
 """
         def randomly_sample(self, data, ratio):
