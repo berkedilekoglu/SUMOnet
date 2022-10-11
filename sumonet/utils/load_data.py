@@ -53,6 +53,7 @@ class Data:
 
                 return [posTrainData, negTrainData, posTestData, negTestData]
 
+"""
         def randomly_sample(self, data, ratio):
 
                 return random.sample(data,k=int((ratio/2)*len(data)))
@@ -72,4 +73,4 @@ class Data:
 
                 return X_train, y_train, X_test, y_test
 
-       
+       """
