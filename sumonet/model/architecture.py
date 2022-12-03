@@ -2,11 +2,24 @@
 from tensorflow.keras import layers, Model, regularizers
 
 
-def get_model_path():
+def get_model_path(state='final'):
+
 
     modelPath = 'sumonet/model/pretrained/'
 
-    return modelPath + 'sumonet3.h5'
+    if state == 'final':
+
+    	print('This model was trained on entire (Tran + Test) data! If you want to use model that was trained on only Train samples please use load_weights(model_state=\'partial\')')
+    	return modelPath + 'sumonet3.h5'
+
+    elif state == 'partial':
+    	print('This model was trained on the Train data! If you want to use final model please use load_weights(model_state=\'final\') ')
+    	return modelPath + 'sumonet3_partial.h5'
+
+    else:
+
+    	raise ValueError('model_state just takes \'final\' or \'partial\' parameters')
+
 
 class SUMOnet(Model):
 
@@ -49,8 +62,8 @@ class SUMOnet(Model):
         
         return x
 
-    def load_weights(self):
+    def load_weights(self,model_state='final'):
 
-        preTrainedModelPath = get_model_path()
+        preTrainedModelPath = get_model_path(model_state)
         super().load_weights(preTrainedModelPath)
 
