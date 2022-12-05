@@ -1,4 +1,3 @@
-
 import joblib
 import numpy as np
 import pandas as pd
@@ -156,7 +155,31 @@ class Encoding(Data):
         self.preprocess_labels()
 
         return self.X, self.Y
+    
+    def get_encoded_X_vector_from_path(self,posDataPath,negDataPath):
 
+        """
+        This function is used to get encoded vectors.
+
+        Args:
+
+            posDataPath: positive data path. This data file is in .fasta format.
+            negDataPath: negative data path. This data file is in .fasta format.
+
+        Output:
+
+            self.X: Encoded samples
+        """
+
+        self.posData = super().get_new_data(posDataPath)
+        self.negData = super().get_new_data(negDataPath)
+        self.sequences = self.posData + self.negData
+
+        self.encode()
+
+        self.preprocess()
+
+        return self.X
 
     def get_encoded_vectors_from_data(self,X, Y):
 
@@ -181,6 +204,28 @@ class Encoding(Data):
         self.preprocess_labels()
 
         return self.X, self.Y
+    
+    def get_encoded_X_vector_from_data(self,X):
+
+        """
+        This function is used to get encoded representation of given vectors.
+
+        Args:
+
+            X: List that contains samples.
+
+        Output:
+
+            self.X: Encoded samples
+        """
+
+        self.sequences = X
+
+        self.encode()
+
+        self.preprocess()
+
+        return self.X
     
     def minmax(self):
 
