@@ -9,7 +9,7 @@ def get_model_path(state='final'):
 
     if state == 'final':
 
-    	print('This model was trained on entire (Tran + Test) data! If you want to use model that was trained on only Train samples please use load_weights(model_state=\'partial\')')
+    	print('This model was trained on entire (Train + Test) data! If you want to use model that was trained on only Train samples please use load_weights(model_state=\'partial\')')
     	return modelPath + 'sumonet3.h5'
 
     elif state == 'partial':
