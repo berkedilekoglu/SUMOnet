@@ -1,9 +1,10 @@
 import os
 
 from typing import List, Tuple
+from os.path import dirname, abspath
 
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
+parent_dir = dirname(dirname(abspath(__file__))) 
 
 
 
@@ -26,8 +27,8 @@ class Data:
                 
                 """
 
-                posTrainDataPath = os.path.join(script_directory, "..", "data","train","Sumoylation_pos_Train.fasta")
-                negTrainDataPath = os.path.join(script_directory, "..", "data","train","Sumoylation_neg_Train.fasta") 
+                posTrainDataPath =  os.path.join(parent_dir,"data","train","Sumoylation_pos_Train.fasta")
+                negTrainDataPath = os.path.join(parent_dir,"data","train","Sumoylation_neg_Train.fasta") 
 
 
                 return posTrainDataPath, negTrainDataPath
@@ -43,8 +44,8 @@ class Data:
                 
                 """
 
-                posTestDataPath = os.path.join(script_directory, "..", "data","test","Sumoylation_pos_Test.fasta") 
-                negTestDataPath = os.path.join(script_directory, "..", "data","test","Sumoylation_neg_Test.fasta")  
+                posTestDataPath = os.path.join(parent_dir,"data","test","Sumoylation_pos_Test.fasta") 
+                negTestDataPath = os.path.join(parent_dir,"data","test","Sumoylation_neg_Test.fasta")  
 
 
                 return posTestDataPath, negTestDataPath
