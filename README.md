@@ -33,7 +33,7 @@ Versions can be followed by [pypi](https://pypi.org/project/sumonet/)
 
 ## Usage
 
-> Please follow the tutorial.ipynb
+> We will release a website for usage
 
 ## Author
 
