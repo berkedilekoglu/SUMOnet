@@ -1,13 +1,17 @@
+import os
 import joblib
 import numpy as np
 import pandas as pd
 import epitopepredict as ep
 
-from sumonet.utils.load_data import Data
+from sumonet.utils.data_pipe import Data
+from typing import List, Any
+
+script_directory = os.path.dirname(os.path.abspath(__file__))
 
 def get_min_max_scaler_path():
 
-        return "sumonet/utils/scaler/minmax_scaler.gz"
+        return os.path.join(script_directory, "scaler", "minmax_scaler.gz")
 
 
 
@@ -39,16 +43,13 @@ def create_dict():
     letterDict["X"] = 20 
     return letterDict
 
-class Encoding(Data):
+class Encoding():
 
-    def __init__(self,encoderType='blosum62',scaler=True):
-
-        super().__init__()
+    def __init__(self, encoderType: str='blosum62' ,scaler: bool=True) -> None:
 
         self.encoderType = encoderType
         self.scaler = scaler
-        self.posData = []
-        self.negData = []
+
 
         self.encodings = create_dict() # Dictionary for one-hot encoding
         self.blosum = ep.blosum62
@@ -56,7 +57,6 @@ class Encoding(Data):
 
         self.sequences = []
         self.X = None
-        self.Y = None
 
     def set_encoder_type(self,encoderType):
         self.encoderType = encoderType
@@ -107,10 +107,6 @@ class Encoding(Data):
 
         self.X = nlf_data     
 
-    def labels(self):
-
-        self.Y = np.asarray([1]*len(self.posData) + [0]*len(self.negData))
-
     def encode(self):
 
         if self.encoderType.lower() == 'blosum62':
@@ -127,105 +123,6 @@ class Encoding(Data):
 
         else:
             raise ValueError('EncoderType is {encoderType}. It should be blosum62, nlf or one-hot.')
-
-    def get_encoded_vectors_from_path(self,posDataPath,negDataPath):
-
-        """
-        This function is used to get encoded vectors.
-
-        Args:
-
-            posDataPath: positive data path. This data file is in .fasta format.
-            negDataPath: negative data path. This data file is in .fasta format.
-
-        Output:
-
-            self.X: Encoded samples
-            self.Y: Labels
-        """
-
-        self.posData = super().get_new_data(posDataPath)
-        self.negData = super().get_new_data(negDataPath)
-        self.sequences = self.posData + self.negData
-
-        self.encode()
-        self.labels()
-
-        self.preprocess()
-        self.preprocess_labels()
-
-        return self.X, self.Y
-    
-    def get_encoded_X_vector_from_path(self,posDataPath,negDataPath):
-
-        """
-        This function is used to get encoded vectors.
-
-        Args:
-
-            posDataPath: positive data path. This data file is in .fasta format.
-            negDataPath: negative data path. This data file is in .fasta format.
-
-        Output:
-
-            self.X: Encoded samples
-        """
-
-        self.posData = super().get_new_data(posDataPath)
-        self.negData = super().get_new_data(negDataPath)
-        self.sequences = self.posData + self.negData
-
-        self.encode()
-
-        self.preprocess()
-
-        return self.X
-
-    def get_encoded_vectors_from_data(self,X, Y):
-
-        """
-        This function is used to get encoded representation of given vectors.
-
-        Args:
-
-            X: List that contains samples.
-
-        Output:
-
-            self.X: Encoded samples
-        """
-
-        self.sequences = X
-        self.Y = np.asarray(Y)
-
-        self.encode()
-
-        self.preprocess()
-        self.preprocess_labels()
-
-        return self.X, self.Y
-    
-    def get_encoded_X_vector_from_data(self,X):
-
-        """
-        This function is used to get encoded representation of given vectors.
-
-        Args:
-
-            X: List that contains samples.
-
-        Output:
-
-            self.X: Encoded samples
-        """
-
-        self.sequences = X
-
-        self.encode()
-
-        self.preprocess()
-
-        return self.X
     
     def minmax(self):
 
@@ -245,9 +142,27 @@ class Encoding(Data):
 
             self.reshape()
 
-    def preprocess_labels(self):
 
-            self.Y = np.eye(2)[self.Y]
+    def encode_data(self,X:List[str]):
 
+            """
+            This function is used to get encoded representation of given vectors.
+
+            Args:
+
+                X: List that contains samples.
+
+            Output:
+
+                self.X: Encoded samples
+            """
+
+            self.sequences = X
+
+            self.encode()
+
+            self.preprocess()
+
+            return self.X
 
     

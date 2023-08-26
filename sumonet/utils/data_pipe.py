@@ -1,6 +1,6 @@
+import os
 
 from typing import List, Tuple
-import os
 
 
 script_directory = os.path.dirname(os.path.abspath(__file__))
