@@ -1,29 +1,31 @@
 
+import os
+from typing import Tuple
+
 from tensorflow.keras import layers, Model, regularizers
 
+script_directory = os.path.dirname(os.path.abspath(__file__))
 
-def get_model_path(state='final'):
+def get_model_path(state='on_entire_data'):
 
+    if state == 'on_entire_data':
 
-    modelPath = 'sumonet/model/pretrained/'
+        print('This model was trained on entire (Train + Test) data! If you want to use model that was trained on only Train samples please use load_weights(model_state=\'on_train_data\')')
+        return os.path.join(script_directory, "pretrained", "sumonet3.h5")
 
-    if state == 'final':
+    elif state == 'on_train_data':
 
-    	print('This model was trained on entire (Train + Test) data! If you want to use model that was trained on only Train samples please use load_weights(model_state=\'partial\')')
-    	return modelPath + 'sumonet3.h5'
-
-    elif state == 'partial':
-    	print('This model was trained on the Train data! If you want to use final model please use load_weights(model_state=\'final\') ')
-    	return modelPath + 'sumonet3_partial.h5'
+        print('This model was trained on the Train data! If you want to use final model please use load_weights(model_state=\'on_entire_data\') ')
+        return os.path.join(script_directory, "pretrained", "sumonet3_partial.h5")
 
     else:
-
-    	raise ValueError('model_state just takes \'final\' or \'partial\' parameters')
+        
+        raise ValueError('model_state just takes \'on_entire_data\' or \'on_train_data\' parameters')
 
 
 class SUMOnet(Model):
 
-    def __init__(self):
+    def __init__(self,input_shape:Tuple[int,int]=(21, 24)) -> None:
         
         super().__init__()
         
@@ -42,6 +44,7 @@ class SUMOnet(Model):
         self.dense2 = layers.Dense(2, kernel_initializer='he_normal')
         self.softmax = layers.Activation('softmax')
 
+        self.build((None, input_shape[0], input_shape[1])) #input shape is batch,21,24 for blosum62 encoded data
 
     def call(self, inputs):
 
@@ -62,7 +65,7 @@ class SUMOnet(Model):
         
         return x
 
-    def load_weights(self,model_state='final'):
+    def load_weights(self,model_state='on_entire_data'):
 
         preTrainedModelPath = get_model_path(model_state)
         super().load_weights(preTrainedModelPath)

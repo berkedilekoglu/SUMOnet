@@ -5,7 +5,7 @@ import pandas as pd
 import epitopepredict as ep
 
 from sumonet.utils.data_pipe import Data
-from typing import List, Any
+from typing import List
 
 script_directory = os.path.dirname(os.path.abspath(__file__))
 
