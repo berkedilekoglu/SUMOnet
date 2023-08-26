@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sumonet',
-    version='0.0.10',
+    version='0.1.0',
     license='Academic Free License ("AFL") v. 3.0',
     author="Berke Dilekoglu",
     author_email='dilekogluberke@gmail.com',
@@ -15,7 +15,7 @@ setup(
     
   },
     url='https://github.com/berkedilekoglu/SUMOnet',
-    download_url = 'https://github.com/berkedilekoglu/SUMOnet/archive/refs/tags/v0.0.10tar.gz', 
+    download_url = 'https://github.com/berkedilekoglu/SUMOnet/archive/refs/tags/v0.0.0tar.gz', 
     keywords='sumoylation machine-learning deep-learning',
     install_requires=[
         'numpy',
