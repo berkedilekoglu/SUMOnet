@@ -10,6 +10,8 @@
 
 > All packages will be installed automatically by pip.
 
+> The following package versions were used to get evaluation results in our paper.
+
 ```python
 python 3.6.6
 numpy 1.19.5
@@ -26,7 +28,7 @@ keras 2.3.1
 You can simply install SUMOnet by using pip
 
 ```python
-pip install sumonet==0.0.2
+pip install sumonet
 ```
 
 Versions can be followed by [pypi](https://pypi.org/project/sumonet/)
