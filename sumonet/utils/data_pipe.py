@@ -250,7 +250,8 @@ class Data:
 
         def fasta_file_input(self,readed_file):
 
-                content_list = readed_file.read().decode("utf-8").splitlines()        
+                content_text = readed_file.read().decode("utf-8")
+                content_list = self.fasta_to_list(content_text)
 
                 return self.protein_sequence_input(content_list)
         
