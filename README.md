@@ -1,8 +1,13 @@
+
 # SUMOnet
 
-> SUMOnet is a python library to predict SUMOylation sites by using a unique deep learning architecture.
+SUMOnet that take the peptide sequence centered on the candidate SUMOylation site as input and predict whether the lysine could be SUMOylated
 
-> We will update that README.md as soon as results are published.
+## Quick Install
+
+```sh
+pip install sumonet
+```
 
 ## Requirements
 
@@ -23,25 +28,16 @@ tensorflow 2.4.0
 keras 2.3.1
 ```
 
-## Installation
+## Detailed Tutorial For Use Cases
 
-You can simply install SUMOnet by using pip
+Please visit our [Tutorial Page](https://sumonet.onrender.com/)
 
-```python
-pip install sumonet
-```
 
-Versions can be followed by [pypi](https://pypi.org/project/sumonet/)
+## Citation
 
-## Usage
+If you use SUMOnet in your work, please do cite us:
 
-> We will release a website for usage
-
-## Author
-
-> Coding: Berke Dilekoglu
-
-> Paper and Experiments: Oznur Tastan, Berke Dilekoglu
+[Dilekoglu, B., Tastan, O.: Sumonet: Deep sequential prediction of sumoylation sites. bioRxiv (2023).](https://www.biorxiv.org/content/10.1101/2023.08.25.554749v1)
 
 ## License
 
