@@ -1,10 +1,12 @@
 import os
+import re
 import requests as r
 
 from Bio import SeqIO
 from io import StringIO
 from typing import List, Tuple
 from os.path import dirname, abspath
+from loguru import logger
 
 
 parent_dir = dirname(dirname(abspath(__file__))) 
@@ -133,6 +135,51 @@ class Data:
                         #Giving an error might be better
                         #User should be noticed for that situation!
                         return None
+        @staticmethod
+        def extract_protein_id(header):
+                # Define the regex pattern to match the identifier between the vertical bars
+                identifier_pattern = r'\|([^|]+)\|'
+
+                # Search for the identifier using the regex pattern
+                match = re.search(identifier_pattern, header)
+
+                if match:
+                        identifier = match.group(1)
+                        return identifier
+                else:
+                        logger.warning(f"Identifier not found in the header: {header}")
+                        return header
+        
+        @staticmethod
+        def fasta_to_list(entire_text:str) -> List[str]:
+
+                lines = entire_text.split('\n')
+                
+                sequence_lines = []
+                sequences = []
+                for line in lines:
+
+                        if line.startswith('>'):
+
+                                if len(sequence_lines) > 0:
+
+                                        sequence = ''.join(sequence_lines)
+                                        sequences.append(sequence)
+
+                                        sequence_lines = []
+
+                                header = Data.extract_protein_id(line)
+                                sequences.append(header)
+
+                        else:
+
+                                sequence_lines.append(line)
+                
+                #For the last seq
+                sequence = ''.join(sequence_lines)
+                sequences.append(sequence)
+
+                return sequences
         
         def find_mers_with_K(self,sequence:str) -> List[str]: 
 
@@ -160,8 +207,6 @@ class Data:
 
                 return mers, k_positions
 
-
-        
 
         def protein_sequence_input(self,sequence_fasta_list:List[str]) -> Tuple[List[str], List[str]]:
 
@@ -208,6 +253,8 @@ class Data:
                 content_list = readed_file.read().decode("utf-8").splitlines()        
 
                 return self.protein_sequence_input(content_list)
+        
+        
 
         def load_sumonet_experiment_data(self) -> Tuple[List[str], List[int], List[str], List[int]]:
                 """
