@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='sumonet',
-    version='0.1.5',
+    version='0.1.6',
     license='Academic Free License ("AFL") v. 3.0',
     description='Package Description',
     long_description=long_description,  # Use contents of README.md
@@ -16,11 +16,11 @@ setup(
     package_data={
     # If any package or subpackage contains *.fasta or *.gz or *.h5 files, include
     # them:
-    "": ["*.fasta", "*.gz","*.h5","*.md"]
+    "": ["*.fasta", "*.gz","*.h5","*.md","*.csv"]
     
   },
     url='https://github.com/berkedilekoglu/SUMOnet',
-    download_url = 'https://github.com/berkedilekoglu/SUMOnet/archive/refs/tags/v0.1.5tar.gz', 
+    download_url = 'https://github.com/berkedilekoglu/SUMOnet/archive/refs/tags/v0.1.6tar.gz', 
     keywords='sumoylation machine-learning deep-learning bioinformatics',
     install_requires=[
         'numpy',
