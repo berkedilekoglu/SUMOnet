@@ -27,7 +27,6 @@ setup(
         'scikit-learn',
         'joblib',
         'pandas',
-        'epitopepredict',
         'tensorflow',
         'keras',
         'requests',
