@@ -2,7 +2,6 @@ import os
 import joblib
 import numpy as np
 import pandas as pd
-import epitopepredict as ep
 
 from sumonet.utils.data_pipe import Data
 from typing import List
@@ -12,6 +11,10 @@ script_directory = os.path.dirname(os.path.abspath(__file__))
 def get_min_max_scaler_path():
 
         return os.path.join(script_directory, "scaler", "minmax_scaler.gz")
+
+def get_blosum_matrix_path():
+
+        return os.path.join(script_directory, "encoding_matrix", "blosum62.csv")
 
 
 
@@ -52,7 +55,7 @@ class Encoding():
 
 
         self.encodings = create_dict() # Dictionary for one-hot encoding
-        self.blosum = ep.blosum62
+        self.blosum = pd.read_csv(get_blosum_matrix_path())
         self.nlf = pd.read_csv('https://raw.githubusercontent.com/dmnfarrell/epitopepredict/master/epitopepredict/mhcdata/NLF.csv',index_col=0)
 
         self.sequences = []
@@ -63,7 +66,7 @@ class Encoding():
     
     def set_encoder_type(self,encoderType):
         self.encoderType = encoderType
-    
+
     def one_hot(self,data):
 
         oneHot_data = np.zeros((len(data),len(data[0]),len(self.encodings)))
