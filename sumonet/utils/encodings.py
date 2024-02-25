@@ -58,9 +58,12 @@ class Encoding():
         self.sequences = []
         self.X = None
 
+    def get_sequence(self):
+        return self.X
+    
     def set_encoder_type(self,encoderType):
         self.encoderType = encoderType
-
+    
     def one_hot(self,data):
 
         oneHot_data = np.zeros((len(data),len(data[0]),len(self.encodings)))

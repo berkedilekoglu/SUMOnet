@@ -26,6 +26,7 @@ pandas 1.0.5
 epitopepredict 0.5.0
 tensorflow 2.4.0
 keras 2.3.1
+loguru 0.7.2
 ```
 
 ## Detailed Tutorial For Use Cases
