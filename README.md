@@ -23,7 +23,6 @@ numpy 1.19.5
 scikit-learn 0.24.2
 joblib 1.0.0
 pandas 1.0.5
-epitopepredict 0.5.0
 tensorflow 2.4.0
 keras 2.3.1
 loguru 0.7.2
